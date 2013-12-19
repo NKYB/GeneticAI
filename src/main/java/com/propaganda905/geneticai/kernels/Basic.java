@@ -4,30 +4,28 @@ import com.amd.aparapi.Kernel;
 
 /**
  * Demonstrates a basic kernel
- * 
- * @author Administrator
+ *
+ * @author NKYB
  */
 public class Basic extends Kernel {
-        
+    /**
+     * Result of kernel
+     */
     public float[] result;
-    
+
     /**
      * Setup the basic kernel variables
-     *
-     * @return      void
      */
-    public void setup(){
+    public void setup() {
         result = new float[20];
     }
-    
+
     /**
      * Basic kernel using aparapi
-     *
-     * @return      void
      */
     @Override
     public void run() {
-        int i= getGlobalId();
-        result[i]=5;
+        int i = getGlobalId();
+        result[i] = 5;
     }
 }

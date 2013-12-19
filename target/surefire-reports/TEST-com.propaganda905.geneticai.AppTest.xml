@@ -60,5 +60,5 @@
     <property name="sun.desktop" value="windows"/>
     <property name="sun.cpu.isalist" value="amd64"/>
   </properties>
-  <testcase time="0.015" classname="com.propaganda905.geneticai.AppTest" name="testApp"/>
+  <testcase time="0.014" classname="com.propaganda905.geneticai.AppTest" name="testApp"/>
 </testsuite>
