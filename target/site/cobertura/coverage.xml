@@ -1,10 +1,10 @@
 <?xml version="1.0"?>
 <!DOCTYPE coverage SYSTEM "http://cobertura.sourceforge.net/xml/coverage-04.dtd">
 
-<coverage line-rate="0.07142857142857142" branch-rate="1.0" lines-covered="1" lines-valid="14" branches-covered="0" branches-valid="0" complexity="1.0" version="2.0.3" timestamp="1387430193655">
+<coverage line-rate="0.07142857142857142" branch-rate="1.0" lines-covered="1" lines-valid="14" branches-covered="0" branches-valid="0" complexity="1.0" version="1.9.4.1" timestamp="1387432456274">
 	<sources>
 		<source>--source</source>
-		<source>C:/Users/Administrator/Documents/GitHub/GeneticAI/src/main/java</source>
+		<source>C:/Users/Administrator/Documents/GitHub/geneticai/src/main/java</source>
 	</sources>
 	<packages>
 		<package name="com.propaganda905.geneticai" line-rate="0.07142857142857142" branch-rate="1.0" complexity="1.0">
