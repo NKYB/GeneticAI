@@ -2,24 +2,29 @@ package com.propaganda905.geneticai.kernels;
 
 import com.amd.aparapi.Kernel;
 
+/**
+ * Demonstrates a basic kernel
+ * 
+ * @author Administrator
+ */
 public class Basic extends Kernel {
         
     public float[] result;
     
-/**
- * Setup the basic kernel variables
- *
- * @return      void
- */
+    /**
+     * Setup the basic kernel variables
+     *
+     * @return      void
+     */
     public void setup(){
         result = new float[20];
     }
     
-/**
- * Basic kernel using aparapi
- *
- * @return      void
- */
+    /**
+     * Basic kernel using aparapi
+     *
+     * @return      void
+     */
     @Override
     public void run() {
         int i= getGlobalId();
