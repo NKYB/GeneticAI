@@ -1,7 +1,5 @@
 package com.propaganda905.geneticai;
 
-import com.amd.aparapi.Kernel;
-import com.amd.aparapi.Range;
 import com.propaganda905.geneticai.kernels.Basic;
 
 public class App 
