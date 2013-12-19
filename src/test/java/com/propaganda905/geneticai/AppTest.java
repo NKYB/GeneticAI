@@ -33,11 +33,10 @@ public class AppTest extends TestCase{
      */
     public void testApp()
     {
+        App app = new App();
+        App.main(new String[0]);
+        app.main(new String[0]);
         assertTrue( true );
     }
     
-    public void testApp2()
-    {
-        assertTrue( true );
-    }
 }

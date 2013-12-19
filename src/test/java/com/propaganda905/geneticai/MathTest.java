@@ -23,6 +23,8 @@ public class MathTest extends TestCase {
         System.out.println("add");
         int expResult = 5;
         int result = Math.add();
+        Math math = new Math();
+        math.add();
         assertEquals(expResult, result);
     }
 }
