@@ -4,6 +4,7 @@ GeneticAI
 Binary Tree + Execution Optimization for Genetic Programming
 
 [![Build Status](https://travis-ci.org/NKYB/GeneticAI.png?branch=master)](https://travis-ci.org/NKYB/GeneticAI)
+[![Coverage Status](https://coveralls.io/repos/NKYB/GeneticAI/badge.png)](https://coveralls.io/r/NKYB/GeneticAI)
 
 ## What
 
