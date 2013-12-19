@@ -18,6 +18,8 @@ public class BasicTest extends TestCase {
         Basic kernel = new Basic();
         kernel.setup();
         kernel.run();
-        assertEquals("Basic Kernel", 5, kernel.result[0]);
+        float result = kernel.result[0];
+        float expected = 5;
+        assertEquals("Basic Kernel", expected, result);
     }
 }
