@@ -2,18 +2,32 @@ package com.propaganda905.geneticai.kernels;
 
 import junit.framework.TestCase;
 
+/* 
+ * Test the basic kernel
+ * 
+ * @author NKYB
+ */
 public class BasicTest extends TestCase {
     
+    /* 
+     * Test Setup 
+     */
     public BasicTest(String testName) {
         super(testName);
     }
 
+    /* 
+     * Test Suite 
+     */
     public void testSetup() {
         Basic instance = new Basic();
         instance.setup();
         assertTrue( true );
     }
 
+    /* 
+     * Basic kernel layout
+     */
     public void testRun() {
         Basic kernel = new Basic();
         kernel.setup();
