@@ -8,7 +8,6 @@
   <name>geneticai</name>
   <url>http://maven.apache.org</url>
   <build>
-    <pluginManagement>
         <plugins>
           <plugin>
               <groupId>org.eluder.coveralls</groupId>
@@ -16,7 +15,6 @@
               <version>2.0.1</version>
           </plugin>
         </plugins>
-    </pluginManagement>
   </build>
     <repositories>
         <!--other repositories if any-->
