@@ -2,21 +2,23 @@ package com.propaganda905.geneticai.kernels;
 
 import junit.framework.TestCase;
 
-/* 
+/**
  * Test the basic kernel
  * 
  * @author NKYB
  */
 public class BasicTest extends TestCase {
     
-    /* 
+    /**
      * Test Setup 
+     * 
+     * @param testName 
      */
     public BasicTest(String testName) {
         super(testName);
     }
 
-    /* 
+    /**
      * Test Suite 
      */
     public void testSetup() {
@@ -25,7 +27,7 @@ public class BasicTest extends TestCase {
         assertTrue( true );
     }
 
-    /* 
+    /**
      * Basic kernel layout
      */
     public void testRun() {
