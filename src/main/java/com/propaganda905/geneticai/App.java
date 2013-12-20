@@ -44,7 +44,14 @@ public class App
              
         float[] result = new float[20];
         
-        Math kernel = new Math(result,seeds);
+        final float[][] inputData = new float[20][3];
+        for (int i = 0; i < 20; i++) {
+            inputData[i][0] = (int)(java.lang.Math.random()*100);
+            inputData[i][1] = (int)(java.lang.Math.random()*100);
+            inputData[i][2] = inputData[i][0] * inputData[i][1];
+        }
+        
+        Math kernel = new Math(inputData, result, seeds);
         kernel.execute(20);
 
         for (int i = 0; i < 20; i++) {
