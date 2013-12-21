@@ -33,29 +33,28 @@ public class Math extends Kernel {
         
         for(int i=0; i < 1000000;i++){
             
-            //evolve
+            // get index of word to change
             int index = Random.next(0, 20, seeds, seedIndex);
             seedIndex=Random.setIndex(++seedIndex,  1000);
             
-            //word
-            
-            int word = 100;
-            word = word + Random.next(0, 3, seeds, seedIndex) * 10;
-            seedIndex=Random.setIndex(++seedIndex,  1000);
-            word = word + Random.next(0, 1, seeds, seedIndex) * 1;
-            seedIndex=Random.setIndex(++seedIndex,  1000);
-            
+            // save the old word in case we need to revert back due to poor score
+            int word_holder = output[(gid * output_num_slots) + index];
+
+            // should I change or delete
             int change_method = Random.next(0, 2, seeds, seedIndex) * 1;
             seedIndex=Random.setIndex(++seedIndex,  1000);
-            int word_holder = output[(gid * output_num_slots) + index];
-            if (change_method < 2){
+            
+            if (change_method < 2){ // change to new word
+                // create word since new word was selected as change method
+                int word = Word.createWord(seeds,seedIndex);
+                seedIndex=seedIndex+2;
+                seedIndex=Random.setIndex(seedIndex,  1000);
                 output[(gid * output_num_slots) + index] = word;
-            } else {
+            } else { // delete the current word
                 output[(gid * output_num_slots) + index] = 0;
             }
             
             //eval
-            
             float sub_score = 100000;
             for(int j=0; j < data_num_rows;j=j+data_num_cols+1){
                 float a = data[j];
