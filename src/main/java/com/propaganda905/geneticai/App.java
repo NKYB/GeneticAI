@@ -66,7 +66,7 @@ public class App
         for (int i = 0; i < 20*3; i=i+3) {
             data[i] = (int)(java.lang.Math.random()*100);
             data[i+1] = (int)(java.lang.Math.random()*100);
-            data[i+2] = data[i] * data[i+1];
+            data[i+2] = data[i] * data[i+1] + data[i] / data[i];
         }
         
         Math kernel = new Math(data, output, seeds, config);
