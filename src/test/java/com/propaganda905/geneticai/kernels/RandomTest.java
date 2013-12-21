@@ -28,7 +28,7 @@ public class RandomTest extends TestCase {
      */
     public void testSetIndex() {
         int index = 0;
-        int maxLength = 2;
+        int maxLength = 3;
         int result = Random.setIndex(index, maxLength);
         assertEquals(0, result);
         result = Random.setIndex(++index, maxLength);
