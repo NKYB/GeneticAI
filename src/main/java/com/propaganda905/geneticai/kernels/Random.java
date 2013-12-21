@@ -12,7 +12,7 @@ class Random {
      * @return 
      */
     static int setIndex(int index, int maxLength){
-        if (index > maxLength){
+        if (index >= maxLength){
             index = 0;
         }
         return index;
