@@ -16,6 +16,8 @@ public class WordTest extends TestCase {
      * Test of createWord method, of class Word.
      */
     public void testCreateWord() {
+        Word word = new Word();
+
         int[] seeds = new int[6];
         seeds[0] = 0;
         seeds[1] = 0;
