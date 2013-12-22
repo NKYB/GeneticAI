@@ -2,6 +2,7 @@ package com.propaganda905.geneticai;
 
 import com.propaganda905.geneticai.kernels.Basic;
 import com.propaganda905.geneticai.kernels.Math;
+import com.propaganda905.geneticai.kernels.Word;
 
 /**
  * Main entry point
@@ -36,24 +37,18 @@ public class App
      * runs the math kernel
      */
     public void runMathKernel(){
-//        int test = 100;
-//        int a = ((test - (test % 100)) / 100);
-//        int b = (test - (a*100)) / 10;
-//        int c = (test % 10);
-//        System.out.println( "Test a: " +  a);
-//        System.out.println( "Test b: " +  b);
-//        System.out.println( "Test c: " +  c);
-        
         int data_num_rows = 20;
         int data_num_cols = 2;
         int output_num_slots = 5;     
-        int num_kernels = 128;
+        int num_kernels = 16;
+        int output_stats_slots = 10;
         
         int[] config = new int[10];
-        config[0] = data_num_rows; // number of input lines
-        config[1] = data_num_cols; // number of input columns
-        config[2] = output_num_slots; // number of output slots
-        config[3] = num_kernels; // number of kernel executers
+        config[0] = data_num_rows;      // number of input lines
+        config[1] = data_num_cols;      // number of input columns
+        config[2] = output_num_slots;   // number of output slots
+        config[3] = num_kernels;        // number of kernel executers
+        config[4] = output_stats_slots; // number of slots for output stats
         
         int[] seeds = new int[1000];
         for (int i = 0; i < 1000; i++) {
@@ -61,22 +56,67 @@ public class App
         }
              
         int[] output = new int[output_num_slots * num_kernels];
+        float[] output_stats = new float[output_stats_slots * num_kernels];
         
         final float[] data = new float[20*3];
         for (int i = 0; i < 20*3; i=i+3) {
             data[i] = (int)(java.lang.Math.random()*100);
             data[i+1] = (int)(java.lang.Math.random()*100);
-            data[i+2] = data[i] * data[i+1] + data[i] / data[i];
+            data[i+2] = data[i] * data[i+1];
         }
         
-        Math kernel = new Math(data, output, seeds, config);
-//        kernel.execute(num_kernels);
-        kernel.run();
+        Math kernel = new Math(data, output, output_stats, seeds, config);
+        kernel.execute(num_kernels);
+//        kernel.run();
 
+        int foundAnswerFlag = 0;
+        float sum = 0;
+        for (int i = 0; i < num_kernels * output_stats_slots; i++) {
+            
+            if (kernel.output_stats[i] > 0){
+                foundAnswerFlag = 1;
+                if (i%output_stats_slots==0){
+                    System.out.println( "Found in # iterations: " + kernel.output_stats[i] );
+                } else {
+                    
+                    System.out.println( "  Word[" + i + "]: " + toString((int)kernel.output_stats[i], data, sum) );
+                    sum = wordToNum(sum, (int)kernel.output_stats[i], data);
+                }
+            }
+            if ((i%output_stats_slots==output_stats_slots-1) && (foundAnswerFlag == 1)){
+                System.out.println( "  Sum    : " + sum);
+                System.out.println( "  Target : " + data[data_num_cols]);
+                foundAnswerFlag = 0;
+                sum=0;
+            }
+        }
+        
         for (int i = 0; i < num_kernels * output_num_slots; i++) {
-            System.out.println( "Result[" + i + "]: " + kernel.output[i] );
+            System.out.println( "Word[" + i + "]: " + kernel.output[i] );
         }
         
         kernel.dispose();
+    }
+    
+    public float wordToNum(float sum, int word, float[] data){
+        int action = Word.findAction(word);
+        int dataIndex = Word.findDataIndex(word);
+        return Math.findSumOfAction(sum, action, data[dataIndex]);
+    }
+    
+    public String toString(int word, float[] data, float sum){
+        int action = Word.findAction(word);
+        int dataIndex = Word.findDataIndex(word);
+        String actionPhrase = "";
+        if (action == 0){
+            actionPhrase = "+";
+        } else if (action == 1){
+            actionPhrase = "-";
+        } else if (action == 2){
+            actionPhrase = "*";
+        } else if (action == 3){
+            actionPhrase = "/";
+        }
+        return sum + " " + actionPhrase + " " +  data[dataIndex] + " (" + word + ")";
     }
 }
