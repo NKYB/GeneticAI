@@ -66,8 +66,8 @@ public class App
         }
         
         Math kernel = new Math(data, output, output_stats, seeds, config);
-        kernel.execute(num_kernels);
-//        kernel.run();
+//        kernel.execute(num_kernels);
+        kernel.run();
 
         int foundAnswerFlag = 0;
         float sum = 0;
