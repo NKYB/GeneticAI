@@ -27,39 +27,39 @@ public class MathTest extends TestCase {
         d[2] = 3;
         
         o = new int[5]; o[0]=100; o[1]=101; o[2]=0; o[3]=0; o[4]=0;
-        assertEquals((float)3.0, Math.findSum(5, 3, 0, o, d, 0));
+        assertEquals((float)3.0, Math.findSum(5, 0, o, d, 0));
 
         o = new int[5]; o[0]=101; o[1]=100; o[2]=0; o[3]=0; o[4]=0;
-        assertEquals((float)3.0, Math.findSum(5, 3, 0, o, d, 0));
+        assertEquals((float)3.0, Math.findSum(5, 0, o, d, 0));
         
         o = new int[5]; o[0]=101; o[1]=0; o[2]=0; o[3]=0; o[4]=100;
-        assertEquals((float)3.0, Math.findSum(5, 3, 0, o, d, 0));
+        assertEquals((float)3.0, Math.findSum(5, 0, o, d, 0));
         
         o = new int[5]; o[0]=101; o[1]=0; o[2]=0; o[3]=100; o[4]=0;
-        assertEquals((float)3.0, Math.findSum(5, 3, 0, o, d, 0));
+        assertEquals((float)3.0, Math.findSum(5, 0, o, d, 0));
         
         o = new int[5]; o[0]=0; o[1]=0; o[2]=0; o[3]=101; o[4]=100;
-        assertEquals((float)3.0, Math.findSum(5, 3, 0, o, d, 0));
+        assertEquals((float)3.0, Math.findSum(5, 0, o, d, 0));
         
         o = new int[5]; o[0]=111; o[1]=0; o[2]=0; o[3]=0; o[4]=0;
-        assertEquals((float)-2.0, Math.findSum(5, 3, 0, o, d, 0));
+        assertEquals((float)-2.0, Math.findSum(5, 0, o, d, 0));
         
         o = new int[5]; o[0]=111; o[1]=110; o[2]=0; o[3]=0; o[4]=0;
-        assertEquals((float)-3.0, Math.findSum(5, 3, 0, o, d, 0));
+        assertEquals((float)-3.0, Math.findSum(5, 0, o, d, 0));
         
         o = new int[5]; o[0]=0; o[1]=130; o[2]=121; o[3]=100; o[4]=110;
-        assertEquals((float)0.0, Math.findSum(5, 3, 0, o, d, 0));
+        assertEquals((float)0.0, Math.findSum(5, 0, o, d, 0));
         
         o = new int[5]; o[0]=100; o[1]=101; o[2]=101; o[3]=111; o[4]=120;
-        assertEquals((float)3.0, Math.findSum(5, 3, 0, o, d, 0));
+        assertEquals((float)3.0, Math.findSum(5, 0, o, d, 0));
         
         d = new float[3]; d[0] = 22; d[1] = 29; d[2] = 638;
         o = new int[5]; o[0]=100; o[1]=100; o[2]=121; o[3]=0; o[4]=0;
-        assertEquals((float)1276.0, Math.findSum(5, 3, 0, o, d, 0));
+        assertEquals((float)1276.0, Math.findSum(5, 0, o, d, 0));
         
         d = new float[3]; d[0] = 30; d[1] = 2; d[2] = 60;
         o = new int[5]; o[0]=110; o[1]=100; o[2]=121; o[3]=0; o[4]=0;
-        assertEquals((float)0.0, Math.findSum(5, 3, 0, o, d, 0));
+        assertEquals((float)0.0, Math.findSum(5, 0, o, d, 0));
     }
     
     /**

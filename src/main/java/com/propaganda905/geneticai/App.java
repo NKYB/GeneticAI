@@ -56,18 +56,18 @@ public class App
         }
              
         int[] output = new int[output_num_slots * num_kernels];
-        float[] output_stats = new float[output_stats_slots * num_kernels];
+        int[] output_stats = new int[output_stats_slots * num_kernels];
         
-        final float[] data = new float[20*3];
-        for (int i = 0; i < 20*3; i=i+3) {
+        final float[] data = new float[data_num_rows*3];
+        for (int i = 0; i < data_num_rows*3; i=i+3) {
             data[i] = (int)(java.lang.Math.random()*100);
             data[i+1] = (int)(java.lang.Math.random()*100);
-            data[i+2] = data[i] * data[i+1] * data[i+1];
+            data[i+2] = data[i] * data[i+1] + data[i];
         }
         
         Math kernel = new Math(data, output, output_stats, seeds, config);
-        kernel.execute(num_kernels);
-//        kernel.run();
+//        kernel.execute(num_kernels);
+        kernel.run();
 
         int foundAnswerFlag = 0;
         float sum = 0;

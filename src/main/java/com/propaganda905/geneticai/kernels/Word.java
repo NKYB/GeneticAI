@@ -11,9 +11,9 @@ package com.propaganda905.geneticai.kernels;
 public class Word {
     public static int createWord(int[] seeds, int seedIndex){
         int action = Random.next(0, 3, seeds, seedIndex);
-        seedIndex=Random.setIndex(++seedIndex,  1000);
+        seedIndex=Random.setIndex(++seedIndex, 1000);
         int dataIndex = Random.next(0, 1, seeds, seedIndex);
-        seedIndex=Random.setIndex(++seedIndex,  1000);
+//        seedIndex=Random.setIndex(++seedIndex, 1000);
         int word = 100;
         word = word + (action * 10);
         word = word + dataIndex;
