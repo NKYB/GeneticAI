@@ -41,7 +41,9 @@ public class AppTest extends TestCase{
         App.main(new String[0]);
         App app = new App();
         app.runBasicKernel();
-        app.runMathKernel();
+        app.runMathKernel(3);
+        app.runMathKernel(300);
+        app.runMathKernel(30000);
         assertTrue( true );
     }
 
@@ -71,7 +73,7 @@ public class AppTest extends TestCase{
     public void testRunMathKernel() {
         System.out.println("runMathKernel");
         App instance = new App();
-        instance.runMathKernel();
+        instance.runMathKernel(10000);
         assertTrue( true );
     }
 
@@ -105,6 +107,8 @@ public class AppTest extends TestCase{
         assertEquals("0.0 + 1.0 (100)", instance.toString(100, data, 0));
         assertEquals("0.0 + 2.0 (101)", instance.toString(101, data, 0));
         assertEquals("10.0 - 2.0 (111)", instance.toString(111, data, 10));
+        assertEquals("10.0 * 2.0 (121)", instance.toString(121, data, 10));
+        assertEquals("10.0 / 2.0 (131)", instance.toString(131, data, 10));
     }
     
 }

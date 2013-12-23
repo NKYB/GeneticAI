@@ -14,6 +14,7 @@ public class Math extends Kernel {
         data_num_cols = config[1];
         output_num_slots = config[2];
         output_stats_slots = config[4];
+        generation_num = config[5];
     }
     
     //config
@@ -21,6 +22,7 @@ public class Math extends Kernel {
     private final int data_num_cols;
     private final int output_num_slots;
     private final int output_stats_slots;
+    private final int generation_num;
 
     private final float[] data;
     public int[] output;
@@ -81,7 +83,7 @@ public class Math extends Kernel {
         int seedIndex=Random.setIndex(gid, 1000);
         float score = 100000;
         
-        for(int i=0; i < 100000;i++){
+        for(int i=0; i < generation_num;i++){
 
             // get index of word to change
             int index = Random.next(0, output_num_slots - 1, seeds, seedIndex);
@@ -115,11 +117,11 @@ public class Math extends Kernel {
             }
             if (score == 0){
                 output_stats[(gid * output_stats_slots)] = i;
-                i=1000000000;
+                i=generation_num;
             }
         }
         if (output_stats[(gid * output_stats_slots)]==0){
-            output_stats[(gid * output_stats_slots)] = 100000000;
+            output_stats[(gid * output_stats_slots)] = generation_num;
         }
         for(int k=0; k < output_num_slots;k++){
 //                    System.out.println("word = " + output[(gid * output_num_slots) + k]);

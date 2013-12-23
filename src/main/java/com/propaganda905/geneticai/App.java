@@ -18,7 +18,7 @@ public class App
     public static void main( String[] args )
     {
         App app = new App();
-        app.runMathKernel();
+        app.runMathKernel(10000);
     }
     
     /**
@@ -36,12 +36,13 @@ public class App
      /**
      * runs the math kernel
      */
-    public void runMathKernel(){
+    public void runMathKernel(int generation_num){
         int data_num_rows = 20;
         int data_num_cols = 2;
         int output_num_slots = 17;     
         int num_kernels = 1;
         int output_stats_slots = 20;
+//        int generation_num = 10;
         
         int[] config = new int[10];
         config[0] = data_num_rows;      // number of input lines
@@ -49,6 +50,7 @@ public class App
         config[2] = output_num_slots;   // number of output slots
         config[3] = num_kernels;        // number of kernel executers
         config[4] = output_stats_slots; // number of slots for output stats
+        config[5] = generation_num;     // number of generations to run
         
         int[] seeds = new int[1000];
         for (int i = 0; i < 1000; i++) {
@@ -62,7 +64,7 @@ public class App
         for (int i = 0; i < data_num_rows*3; i=i+3) {
             data[i] = (int)(java.lang.Math.random()*100);
             data[i+1] = (int)(java.lang.Math.random()*100);
-            data[i+2] = data[i] * data[i+1] + data[i] / data[i];
+            data[i+2] = data[i] * data[i+1] + data[i] ;
         }
         
         Math kernel = new Math(data, output, output_stats, seeds, config);
