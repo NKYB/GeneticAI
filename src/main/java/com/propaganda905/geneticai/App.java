@@ -1,6 +1,7 @@
 package com.propaganda905.geneticai;
 
 import com.propaganda905.geneticai.kernels.Basic;
+import com.propaganda905.geneticai.kernels.Config;
 import com.propaganda905.geneticai.kernels.Math;
 import com.propaganda905.geneticai.kernels.Word;
 
@@ -18,7 +19,14 @@ public class App
     public static void main( String[] args )
     {
         App app = new App();
-        app.runMathKernel(10000);
+        Config config = new Config();
+        config.setData_num_cols(2);
+        config.setData_num_rows(20);
+        config.setGeneration_num(10000);
+        config.setNum_kernels(1);
+        config.setOutput_num_slots(5);
+        config.setOutput_stats_slots(10);
+        app.runMathKernel(config);
     }
     
     /**
@@ -36,48 +44,33 @@ public class App
      /**
      * runs the math kernel
      */
-    public void runMathKernel(int generation_num){
-        int data_num_rows = 20;
-        int data_num_cols = 2;
-        int output_num_slots = 17;     
-        int num_kernels = 1;
-        int output_stats_slots = 20;
-//        int generation_num = 10;
-        
-        int[] config = new int[10];
-        config[0] = data_num_rows;      // number of input lines
-        config[1] = data_num_cols;      // number of input columns
-        config[2] = output_num_slots;   // number of output slots
-        config[3] = num_kernels;        // number of kernel executers
-        config[4] = output_stats_slots; // number of slots for output stats
-        config[5] = generation_num;     // number of generations to run
-        
+    public void runMathKernel(Config config){
         int[] seeds = new int[1000];
         for (int i = 0; i < 1000; i++) {
             seeds[i] = (int)((java.lang.Math.random()*89999999) + 10000000);
         }
              
-        int[] output = new int[output_num_slots * num_kernels];
-        int[] output_stats = new int[output_stats_slots * num_kernels];
+        int[] output = new int[config.getOutput_num_slots() * config.getNum_kernels()];
+        int[] output_stats = new int[config.getOutput_stats_slots() * config.getNum_kernels()];
         
-        final float[] data = new float[data_num_rows*3];
-        for (int i = 0; i < data_num_rows*3; i=i+3) {
+        final float[] data = new float[config.getData_num_rows()*3];
+        for (int i = 0; i < config.getData_num_rows()*3; i=i+3) {
             data[i] = (int)(java.lang.Math.random()*100);
             data[i+1] = (int)(java.lang.Math.random()*100);
             data[i+2] = data[i] * data[i+1] + data[i] ;
         }
         
-        Math kernel = new Math(data, output, output_stats, seeds, config);
+        Math kernel = new Math(data, output, output_stats, seeds, config.getConfig());
 //        kernel.execute(num_kernels);
         kernel.run();
 
         int foundAnswerFlag = 0;
         float sum = 0;
-        for (int i = 0; i < num_kernels * output_stats_slots; i++) {
+        for (int i = 0; i < config.getNum_kernels() * config.getOutput_num_slots(); i++) {
             
             if (kernel.output_stats[i] > 0){
                 foundAnswerFlag = 1;
-                if (i%output_stats_slots==0){
+                if (i%config.getOutput_num_slots()==0){
                     System.out.println( "Found in # iterations: " + kernel.output_stats[i] );
                 } else {
                     
@@ -85,9 +78,9 @@ public class App
                     sum = wordToNum(sum, (int)kernel.output_stats[i], data);
                 }
             }
-            if ((i%output_stats_slots==output_stats_slots-1) && (foundAnswerFlag == 1)){
+            if ((i%config.getOutput_num_slots()==config.getOutput_num_slots()-1) && (foundAnswerFlag == 1)){
                 System.out.println( "  Sum    : " + sum);
-                System.out.println( "  Target : " + data[data_num_cols]);
+                System.out.println( "  Target : " + data[config.getData_num_cols()]);
                 foundAnswerFlag = 0;
                 sum=0;
             }

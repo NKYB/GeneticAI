@@ -1,5 +1,6 @@
 package com.propaganda905.geneticai;
 
+import com.propaganda905.geneticai.kernels.Config;
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;
@@ -38,12 +39,26 @@ public class AppTest extends TestCase{
      */
     public void testApp()
     {
+        Config config = new Config();
+        config.setData_num_cols(2);
+        config.setData_num_rows(20);
+        config.setNum_kernels(1);
+        config.setOutput_num_slots(7);
+        config.setOutput_stats_slots(8);
+        
         App.main(new String[0]);
         App app = new App();
         app.runBasicKernel();
-        app.runMathKernel(3);
-        app.runMathKernel(300);
-        app.runMathKernel(30000);
+        
+        config.setGeneration_num(3);
+        app.runMathKernel(config);
+        
+        config.setGeneration_num(300);
+        app.runMathKernel(config);
+        
+        config.setGeneration_num(30000);
+        app.runMathKernel(config);
+        
         assertTrue( true );
     }
 
@@ -73,7 +88,17 @@ public class AppTest extends TestCase{
     public void testRunMathKernel() {
         System.out.println("runMathKernel");
         App instance = new App();
-        instance.runMathKernel(10000);
+        
+        Config config = new Config();
+        config.setData_num_cols(2);
+        config.setData_num_rows(20);
+        config.setNum_kernels(1);
+        config.setOutput_num_slots(7);
+        config.setOutput_stats_slots(8);
+        config.setGeneration_num(30000);
+        
+        instance.runMathKernel(config);
+        
         assertTrue( true );
     }
 
