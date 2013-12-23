@@ -1,4 +1,4 @@
 -------------------------------------------------------------------------------
 Test set: com.propaganda905.geneticai.AppTest
 -------------------------------------------------------------------------------
-Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.76 sec
+Tests run: 6, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 1.908 sec

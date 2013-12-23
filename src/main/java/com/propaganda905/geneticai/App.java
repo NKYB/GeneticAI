@@ -92,10 +92,7 @@ public class App
                 sum=0;
             }
         }
-        
-//        for (int i = 0; i < num_kernels * output_num_slots; i++) {
-//            System.out.println( "Word[" + i + "]: " + kernel.output[i] );
-//        }
+
         System.out.println("Execution mode = "+kernel.getExecutionMode());
         kernel.dispose();
     }
