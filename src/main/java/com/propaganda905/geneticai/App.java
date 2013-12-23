@@ -62,12 +62,12 @@ public class App
         for (int i = 0; i < 20*3; i=i+3) {
             data[i] = (int)(java.lang.Math.random()*100);
             data[i+1] = (int)(java.lang.Math.random()*100);
-            data[i+2] = data[i] * data[i+1];
+            data[i+2] = data[i] * data[i+1] * data[i+1];
         }
         
         Math kernel = new Math(data, output, output_stats, seeds, config);
-//        kernel.execute(num_kernels);
-        kernel.run();
+        kernel.execute(num_kernels);
+//        kernel.run();
 
         int foundAnswerFlag = 0;
         float sum = 0;
@@ -91,10 +91,10 @@ public class App
             }
         }
         
-        for (int i = 0; i < num_kernels * output_num_slots; i++) {
-            System.out.println( "Word[" + i + "]: " + kernel.output[i] );
-        }
-        
+//        for (int i = 0; i < num_kernels * output_num_slots; i++) {
+//            System.out.println( "Word[" + i + "]: " + kernel.output[i] );
+//        }
+        System.out.println("Execution mode = "+kernel.getExecutionMode());
         kernel.dispose();
     }
     

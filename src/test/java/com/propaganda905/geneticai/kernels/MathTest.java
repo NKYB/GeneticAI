@@ -19,43 +19,47 @@ public class MathTest extends TestCase {
      * Test of findfindSum method, of class Math.
      */
     public void testfindSum() {
-        int doit = 0;
-        float[] data = new float[3];
-        int[] output = new int[5];
+        float[] d = new float[3];
+        int[] o;
         
-//        for(int i=0; i < 100000;i++){
-//            data = new float[3];
-//            data[0] = 0 + (int)(java.lang.Math.random() * ((1000 - 0) + 1));
-//            data[1] = 0 + (int)(java.lang.Math.random() * ((1000 - 0) + 1));
-//            data[2] = data[0] + data[1];
-//            doit = 0 + (int)(java.lang.Math.random() * ((1 - 0) + 1));
-//            
-//            output = new int[5];
-//            
-//        }
+        d[0] = 1;
+        d[1] = 2;
+        d[2] = 3;
         
-        data[0] = 1;
-        data[1] = 2;
-        data[2] = 3;
-        output[0]=100;
-        output[1]=101;
-        assertEquals((float)3.0, Math.findSum(5, 0, output, data, 0));
+        o = new int[5]; o[0]=100; o[1]=101; o[2]=0; o[3]=0; o[4]=0;
+        assertEquals((float)3.0, Math.findSum(5, 3, 0, o, d, 0));
 
-        output[0]=101;
-        output[1]=100;
-        assertEquals((float)3.0, Math.findSum(5, 0, output, data, 0));
+        o = new int[5]; o[0]=101; o[1]=100; o[2]=0; o[3]=0; o[4]=0;
+        assertEquals((float)3.0, Math.findSum(5, 3, 0, o, d, 0));
         
-        output[0]=101;
-        output[4]=100;
-        assertEquals((float)4.0, Math.findSum(5, 0, output, data, 0));
+        o = new int[5]; o[0]=101; o[1]=0; o[2]=0; o[3]=0; o[4]=100;
+        assertEquals((float)3.0, Math.findSum(5, 3, 0, o, d, 0));
         
-        output[2]=101;
-        output[4]=100;
-        assertEquals((float)6.0, Math.findSum(5, 0, output, data, 0));
+        o = new int[5]; o[0]=101; o[1]=0; o[2]=0; o[3]=100; o[4]=0;
+        assertEquals((float)3.0, Math.findSum(5, 3, 0, o, d, 0));
         
-        output[3]=101;
-        output[4]=100;
-        assertEquals((float)8.0, Math.findSum(5, 0, output, data, 0));
+        o = new int[5]; o[0]=0; o[1]=0; o[2]=0; o[3]=101; o[4]=100;
+        assertEquals((float)3.0, Math.findSum(5, 3, 0, o, d, 0));
+        
+        o = new int[5]; o[0]=111; o[1]=0; o[2]=0; o[3]=0; o[4]=0;
+        assertEquals((float)-2.0, Math.findSum(5, 3, 0, o, d, 0));
+        
+        o = new int[5]; o[0]=111; o[1]=110; o[2]=0; o[3]=0; o[4]=0;
+        assertEquals((float)-3.0, Math.findSum(5, 3, 0, o, d, 0));
+        
+        o = new int[5]; o[0]=0; o[1]=130; o[2]=121; o[3]=100; o[4]=110;
+        assertEquals((float)0.0, Math.findSum(5, 3, 0, o, d, 0));
+        
+        o = new int[5]; o[0]=100; o[1]=101; o[2]=101; o[3]=111; o[4]=120;
+        assertEquals((float)3.0, Math.findSum(5, 3, 0, o, d, 0));
+        
+        d = new float[3]; d[0] = 22; d[1] = 29; d[2] = 638;
+        o = new int[5]; o[0]=100; o[1]=100; o[2]=121; o[3]=0; o[4]=0;
+        assertEquals((float)1276.0, Math.findSum(5, 3, 0, o, d, 0));
+        
+        d = new float[3]; d[0] = 30; d[1] = 2; d[2] = 60;
+        o = new int[5]; o[0]=110; o[1]=100; o[2]=121; o[3]=0; o[4]=0;
+        assertEquals((float)0.0, Math.findSum(5, 3, 0, o, d, 0));
     }
     
     /**
