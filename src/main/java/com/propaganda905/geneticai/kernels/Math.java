@@ -115,14 +115,17 @@ public class Math extends Kernel {
             }
             if (score == 0){
                 output_stats[(gid * output_stats_slots)] = i;
-                for(int k=0; k < output_num_slots;k++){
+                i=1000000000;
+            }
+        }
+        if (output_stats[(gid * output_stats_slots)]==0){
+            output_stats[(gid * output_stats_slots)] = 100000000;
+        }
+        for(int k=0; k < output_num_slots;k++){
 //                    System.out.println("word = " + output[(gid * output_num_slots) + k]);
-                    int word_temp = output[(gid * output_num_slots) + k];
-                    if (word_temp>0){
-                        output_stats[(gid * output_stats_slots) + k + 1] = word_temp;
-                    }
-                }
-                i=100000000;
+            int word_temp = output[(gid * output_num_slots) + k];
+            if (word_temp>0){
+                output_stats[(gid * output_stats_slots) + k + 1] = word_temp;
             }
         }
     }
