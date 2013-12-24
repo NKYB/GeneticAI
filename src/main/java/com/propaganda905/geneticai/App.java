@@ -56,8 +56,8 @@ public class App
     public void runMathKernel(Config config, Data data){
         Math kernel = new Math(data.getData(), config.getConfig());
         System.out.println("Execution mode = " + kernel.getExecutionMode());
-        kernel.execute(config.getNum_kernels());
-//        kernel.run();
+//        kernel.execute(config.getNum_kernels());
+        kernel.run();
         outputResult(config, data, kernel.output_stats);
         kernel.dispose();
     }
