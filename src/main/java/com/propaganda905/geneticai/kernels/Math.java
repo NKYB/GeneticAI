@@ -90,10 +90,10 @@ public class Math extends Kernel {
             seedIndex=Random.setIndex(++seedIndex,  1000);
 
             // should I change or delete
-            int change_method = Random.next(0, 2, seeds, seedIndex) * 1;
+            int change_method = Random.next(0, 1, seeds, seedIndex) * 1;
             seedIndex=Random.setIndex(++seedIndex,  1000);
             int hold_word = output[(gid * output_num_slots) + index];
-            if (change_method < 2){ // change to new word
+            if (change_method < 1){ // change to new word
                 // create word since new word was selected as change method
                 int word = Word.createWord(seeds,seedIndex);
                 seedIndex=seedIndex+2;
@@ -124,7 +124,7 @@ public class Math extends Kernel {
             output_stats[(gid * output_stats_slots)] = generation_num;
         }
         for(int k=0; k < output_num_slots;k++){
-//                    System.out.println("word = " + output[(gid * output_num_slots) + k]);
+//            System.out.println("word = " + output[(gid * output_num_slots) + k]);
             int word_temp = output[(gid * output_num_slots) + k];
             if (word_temp>0){
                 output_stats[(gid * output_stats_slots) + k + 1] = word_temp;

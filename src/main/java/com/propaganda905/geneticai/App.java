@@ -66,11 +66,11 @@ public class App
 
         int foundAnswerFlag = 0;
         float sum = 0;
-        for (int i = 0; i < config.getNum_kernels() * config.getOutput_num_slots(); i++) {
+        for (int i = 0; i < config.getNum_kernels() * config.getOutput_stats_slots(); i++) {
             
             if (kernel.output_stats[i] > 0){
                 foundAnswerFlag = 1;
-                if (i%config.getOutput_num_slots()==0){
+                if (i%config.getOutput_stats_slots()==0){
                     System.out.println( "Found in # iterations: " + kernel.output_stats[i] );
                 } else {
                     
