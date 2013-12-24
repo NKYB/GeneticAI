@@ -49,6 +49,7 @@ public class AppTest extends TestCase{
         config.setNum_kernels(1);
         config.setOutput_num_slots(7);
         config.setOutput_stats_slots(8);
+        config.setNum_seeds(1000);
 
         App.main(new String[0]);
         App app = new App();
@@ -103,6 +104,7 @@ public class AppTest extends TestCase{
         config.setOutput_num_slots(7);
         config.setOutput_stats_slots(8);
         config.setGeneration_num(30000);
+        config.setNum_seeds(1000);
 
         instance.runMathKernel(config, data);
         

@@ -31,6 +31,7 @@ public class App
         config.setNum_kernels(2);
         config.setOutput_num_slots(5);
         config.setOutput_stats_slots(10);
+        config.setNum_seeds(1000);
 
         app.runMathKernel(config, data);
     }

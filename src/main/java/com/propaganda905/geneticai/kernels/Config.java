@@ -5,7 +5,7 @@ package com.propaganda905.geneticai.kernels;
  * @author Administrator
  */
 public class Config {
-    private int[] config = new int[6];
+    private int[] config = new int[7];
     
     /**
      * number of input lines
@@ -37,6 +37,38 @@ public class Config {
      */
     private int generation_num = 10000;
     
+    /**
+     * number of seeds required
+     */
+    private int num_seeds = 1000;
+
+    public int getNum_seeds() {
+        return num_seeds;
+    }
+
+    public void setNum_seeds(int num_seeds) {
+        config[6] = num_seeds;
+        this.num_seeds = num_seeds;
+    }
+    
+    public static int[] getSeeds(int num_seeds) {
+        int[] seeds = new int[num_seeds];
+        for (int i = 0; i < num_seeds; i++) {
+            seeds[i] = (int)((java.lang.Math.random()*89999999) + 10000000);
+        }
+        return seeds;
+    }
+
+    public static int[] getOutput(int output_num_slots, int num_kernels) {
+        int[] output = new int[output_num_slots * num_kernels];
+        return output;
+    }
+
+    public static int[] getOutput_stats(int output_stats_slots, int num_kernels) {
+        int[] output_stats = new int[output_stats_slots * num_kernels];
+        return output_stats;
+    }
+
     public int[] getConfig(){
         return config;
     }

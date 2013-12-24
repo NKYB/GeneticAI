@@ -10,6 +10,7 @@ public class Math extends Kernel {
     private final int num_kernels;
     private final int output_stats_slots;
     private final int generation_num;
+    private final int num_seeds;
 
     private final float[] data;
     public int[] output;
@@ -23,16 +24,13 @@ public class Math extends Kernel {
         num_kernels         = config[3];
         output_stats_slots  = config[4];
         generation_num      = config[5];
+        num_seeds           = config[6];
         
         this.data = data.clone();
         
-        this.seeds = new int[1000];
-        for (int i = 0; i < 1000; i++) {
-            this.seeds[i] = (int)((java.lang.Math.random()*89999999) + 10000000);
-        }
-             
-        this.output = new int[output_num_slots * num_kernels];
-        this.output_stats = new int[output_stats_slots * num_kernels];
+        this.seeds = Config.getSeeds(num_seeds);
+        this.output = Config.getOutput(output_num_slots, num_kernels);
+        this.output_stats = Config.getOutput_stats(output_stats_slots, num_kernels);
     }
 
     public static float findSum(int output_num_slots, int gid, int[] output, float[] data, int dataRow){
