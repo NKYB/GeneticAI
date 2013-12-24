@@ -1,10 +1,12 @@
 package com.propaganda905.geneticai;
 
+import com.amd.aparapi.ProfileInfo;
 import com.propaganda905.geneticai.kernels.Basic;
 import com.propaganda905.geneticai.kernels.Config;
 import com.propaganda905.geneticai.kernels.Data;
 import com.propaganda905.geneticai.kernels.Math;
 import com.propaganda905.geneticai.kernels.Word;
+import java.util.List;
 
 /**
  * Main entry point
@@ -22,16 +24,16 @@ public class App
         App app = new App();
         
         Data data = new Data();
-        data.createRandomDataAsMap(500,15);
+        data.createRandomDataAsMap(100, 5);
         
         Config config = new Config();
         config.setData_num_cols(data.getNumDataCols());
         config.setData_num_rows(data.getNumRows());
-        config.setGeneration_num(1000);
-        config.setNum_kernels(2);
+        config.setGeneration_num(10000);
+        config.setNum_kernels(1440);
         config.setOutput_num_slots(5);
         config.setOutput_stats_slots(10);
-        config.setNum_seeds(1000);
+        config.setNum_seeds(10000);
 
         app.runMathKernel(config, data);
     }
@@ -54,21 +56,23 @@ public class App
     public void runMathKernel(Config config, Data data){
         Math kernel = new Math(data.getData(), config.getConfig());
         System.out.println("Execution mode = " + kernel.getExecutionMode());
-//        kernel.execute(config.getNum_kernels());
-        kernel.run();
+        kernel.execute(config.getNum_kernels());
+//        kernel.run();
         outputResult(config, data, kernel.output_stats);
         kernel.dispose();
     }
     
     public void outputResult(Config config, Data data, int[] output_stats){
         int foundAnswerFlag = 0;
+        int countKernels = 0;
         float sum = 0;
         for (int i = 0; i < config.getNum_kernels() * config.getOutput_stats_slots(); i++) {
             
             if (output_stats[i] > 0){
                 foundAnswerFlag = 1;
                 if (i%config.getOutput_stats_slots()==0){
-                    System.out.println( "Found in # iterations: " + output_stats[i] );
+                    countKernels++;
+                    System.out.println(countKernels + ": Found in # iterations: " + output_stats[i] );
                 } else {
                     
                     System.out.println( "  Word[" + i + "]: " + toString((int)output_stats[i], data.getData(), sum) );

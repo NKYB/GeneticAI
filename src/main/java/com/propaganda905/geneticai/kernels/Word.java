@@ -9,11 +9,10 @@ package com.propaganda905.geneticai.kernels;
  * @author Administrator
  */
 public class Word {
-    public static int createWord(int[] seeds, int seedIndex){
+    public static int createWord(int[] seeds, int seedIndex, int numCols){
         int action = Random.next(0, 3, seeds, seedIndex);
         seedIndex=Random.setIndex(++seedIndex, 1000);
-        int dataIndex = Random.next(0, 1, seeds, seedIndex);
-//        seedIndex=Random.setIndex(++seedIndex, 1000);
+        int dataIndex = Random.next(0, numCols, seeds, seedIndex);
         int word = 100;
         word = word + (action * 10);
         word = word + dataIndex;

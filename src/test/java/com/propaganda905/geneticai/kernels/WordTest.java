@@ -26,9 +26,9 @@ public class WordTest extends TestCase {
         seeds[4] = 2;
         seeds[5] = 2;
         
-        assertEquals(100, Word.createWord(seeds, 0));
-        assertEquals(111, Word.createWord(seeds, 2));
-        assertEquals(120, Word.createWord(seeds, 4));
+        assertEquals(100, Word.createWord(seeds, 0, 0));
+        assertEquals(110, Word.createWord(seeds, 2, 0));
+        assertEquals(120, Word.createWord(seeds, 4, 0));
     }
 
     /**

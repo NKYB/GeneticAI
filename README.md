@@ -15,3 +15,12 @@ This requires a developer to take a genetic algorithm framework and develop a la
 specific to the problem before an acceptable level of performance and accuracy is achieved. 
 GeneticAI aims to improve the tools for discovery of genetic algorithms without compromising 
 performance. Think super amino acids or sharks with lasers.
+
+## Current Performance 
+
+2,880,000 Generations Per Second
+
+GPU: ATI Radeon HD 5850
+Stream Processing Units (Cores): 1440
+Current Retail Price: $80
+Max Processing power (single precision): 2.09 TeraFLOPS

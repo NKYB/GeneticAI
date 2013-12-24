@@ -92,7 +92,7 @@ public class Math extends Kernel {
             int hold_word = output[(gid * output_num_slots) + index];
             if (change_method < 1){ // change to new word
                 // create word since new word was selected as change method
-                int word = Word.createWord(seeds,seedIndex);
+                int word = Word.createWord(seeds,seedIndex,data_num_cols-1);
                 seedIndex=seedIndex+2;
                 seedIndex=Random.setIndex(seedIndex,  1000);
                 output[(gid * output_num_slots) + index] = word;
