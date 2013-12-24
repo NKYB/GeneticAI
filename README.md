@@ -27,3 +27,4 @@ Stream Processing Units (Cores): 1440
 Current Retail Price: $80
 
 Max Processing power (single precision): 2.09 TeraFLOPS
+
