@@ -3,24 +3,11 @@ package com.propaganda905.geneticai.kernels;
 import com.amd.aparapi.Kernel;
 
 public class Math extends Kernel {
-
-    public Math(float[] data, int output[], int[] output_stats, int[] seeds, int[] config) {
-        this.data = data.clone();
-        this.output = output.clone();
-        this.output_stats = output_stats.clone();
-        this.seeds = seeds.clone();
-
-        data_num_rows = config[0];
-        data_num_cols = config[1];
-        output_num_slots = config[2];
-        output_stats_slots = config[4];
-        generation_num = config[5];
-    }
-    
     //config
     private final int data_num_rows;
     private final int data_num_cols;
     private final int output_num_slots;
+    private final int num_kernels;
     private final int output_stats_slots;
     private final int generation_num;
 
@@ -29,6 +16,25 @@ public class Math extends Kernel {
     public int[] output_stats;
     private final int[] seeds;
     
+    public Math(float[] data, int[] config) {
+        data_num_rows       = config[0];
+        data_num_cols       = config[1];
+        output_num_slots    = config[2];
+        num_kernels         = config[3];
+        output_stats_slots  = config[4];
+        generation_num      = config[5];
+        
+        this.data = data.clone();
+        
+        this.seeds = new int[1000];
+        for (int i = 0; i < 1000; i++) {
+            this.seeds[i] = (int)((java.lang.Math.random()*89999999) + 10000000);
+        }
+             
+        this.output = new int[output_num_slots * num_kernels];
+        this.output_stats = new int[output_stats_slots * num_kernels];
+    }
+
     public static float findSum(int output_num_slots, int gid, int[] output, float[] data, int dataRow){
         float sum = 0;
         for(int k=0; k < output_num_slots;k++){
@@ -50,22 +56,15 @@ public class Math extends Kernel {
         if (action == 1){
             sum = sum - dataValue;
         }
-        if (action == 2){
-            if (sum != 0){
-                sum = sum * dataValue;
-            }
+        if (action == 2 && sum != 0){
+            sum = sum * dataValue;
         }
-        if (action == 3){
-            if (sum != 0){
-                  if (dataValue != 0){
-                      sum = sum / dataValue;
-                  }
-            }
+        if (action == 3 && sum != 0 && dataValue != 0){
+            sum = sum / dataValue;
         }
         return sum;
     }
 
-    
     public static float findDiff(float target, float sum){
         float diff = 0;
         if (target >= sum){

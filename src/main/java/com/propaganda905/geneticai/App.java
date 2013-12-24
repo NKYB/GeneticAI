@@ -2,6 +2,7 @@ package com.propaganda905.geneticai;
 
 import com.propaganda905.geneticai.kernels.Basic;
 import com.propaganda905.geneticai.kernels.Config;
+import com.propaganda905.geneticai.kernels.Data;
 import com.propaganda905.geneticai.kernels.Math;
 import com.propaganda905.geneticai.kernels.Word;
 
@@ -19,14 +20,19 @@ public class App
     public static void main( String[] args )
     {
         App app = new App();
+        
+        Data data = new Data();
+        data.createRandomDataAsMap(500,15);
+        
         Config config = new Config();
-        config.setData_num_cols(2);
-        config.setData_num_rows(20);
-        config.setGeneration_num(10000);
-        config.setNum_kernels(1);
+        config.setData_num_cols(data.getNumDataCols());
+        config.setData_num_rows(data.getNumRows());
+        config.setGeneration_num(1000);
+        config.setNum_kernels(2);
         config.setOutput_num_slots(5);
         config.setOutput_stats_slots(10);
-        app.runMathKernel(config);
+
+        app.runMathKernel(config, data);
     }
     
     /**
@@ -44,50 +50,37 @@ public class App
      /**
      * runs the math kernel
      */
-    public void runMathKernel(Config config){
-        int[] seeds = new int[1000];
-        for (int i = 0; i < 1000; i++) {
-            seeds[i] = (int)((java.lang.Math.random()*89999999) + 10000000);
-        }
-             
-        int[] output = new int[config.getOutput_num_slots() * config.getNum_kernels()];
-        int[] output_stats = new int[config.getOutput_stats_slots() * config.getNum_kernels()];
-        
-        final float[] data = new float[config.getData_num_rows()*3];
-        for (int i = 0; i < config.getData_num_rows()*3; i=i+3) {
-            data[i] = (int)(java.lang.Math.random()*100);
-            data[i+1] = (int)(java.lang.Math.random()*100);
-            data[i+2] = data[i] * data[i+1] + data[i] ;
-        }
-        
-        Math kernel = new Math(data, output, output_stats, seeds, config.getConfig());
-//        kernel.execute(num_kernels);
-        kernel.run();
-
+    public void runMathKernel(Config config, Data data){
+        Math kernel = new Math(data.getData(), config.getConfig());
+        System.out.println("Execution mode = " + kernel.getExecutionMode());
+        kernel.execute(config.getNum_kernels());
+//        kernel.run();
+        outputResult(config, data, kernel.output_stats);
+        kernel.dispose();
+    }
+    
+    public void outputResult(Config config, Data data, int[] output_stats){
         int foundAnswerFlag = 0;
         float sum = 0;
         for (int i = 0; i < config.getNum_kernels() * config.getOutput_stats_slots(); i++) {
             
-            if (kernel.output_stats[i] > 0){
+            if (output_stats[i] > 0){
                 foundAnswerFlag = 1;
                 if (i%config.getOutput_stats_slots()==0){
-                    System.out.println( "Found in # iterations: " + kernel.output_stats[i] );
+                    System.out.println( "Found in # iterations: " + output_stats[i] );
                 } else {
                     
-                    System.out.println( "  Word[" + i + "]: " + toString((int)kernel.output_stats[i], data, sum) );
-                    sum = wordToNum(sum, (int)kernel.output_stats[i], data);
+                    System.out.println( "  Word[" + i + "]: " + toString((int)output_stats[i], data.getData(), sum) );
+                    sum = wordToNum(sum, (int)output_stats[i], data.getData());
                 }
             }
-            if ((i%config.getOutput_num_slots()==config.getOutput_num_slots()-1) && (foundAnswerFlag == 1)){
+            if ((i%config.getOutput_stats_slots()==config.getOutput_stats_slots()-1) && (foundAnswerFlag == 1)){
                 System.out.println( "  Sum    : " + sum);
-                System.out.println( "  Target : " + data[config.getData_num_cols()]);
+                System.out.println( "  Target : " + data.getDataAtPoint(0, config.getData_num_cols()));
                 foundAnswerFlag = 0;
                 sum=0;
             }
         }
-
-        System.out.println("Execution mode = "+kernel.getExecutionMode());
-        kernel.dispose();
     }
     
     public float wordToNum(float sum, int word, float[] data){
