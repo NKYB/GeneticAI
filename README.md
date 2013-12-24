@@ -21,6 +21,9 @@ performance. Think super amino acids or sharks with lasers.
 2,880,000 Generations Per Second
 
 GPU: ATI Radeon HD 5850
+
 Stream Processing Units (Cores): 1440
+
 Current Retail Price: $80
+
 Max Processing power (single precision): 2.09 TeraFLOPS
