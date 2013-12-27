@@ -7,6 +7,10 @@ package com.propaganda905.geneticai.input;
 import com.propaganda905.genetical.input.CSV;
 import java.io.File;
 import java.io.IOException;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import junit.framework.TestCase;
 
 /**
@@ -22,10 +26,10 @@ public class CSVTest extends TestCase {
     /**
      * Test of readCSVFileFromDisk method, of class CSV.
      */
-    public void testReadCSVFileFromDisk() throws IOException {
-        System.out.println("readCSVFileFromDisk");
-        String currentPath = new File(".").getCanonicalPath();
-        String fullFileNameAndPath = currentPath + "/src/test/java/com/propaganda905/geneticai/input/testdata.csv";
+    public void testReadCSVFileFromDisk() throws IOException, URISyntaxException {
+        URL resourceUrl = getClass().getResource("/testdata.csv");
+        Path resourcePath = Paths.get(resourceUrl.toURI());
+        String fullFileNameAndPath = resourcePath.toString();
         CSV csvInputObject = new CSV();
         csvInputObject.readCSVFileFromDisk(fullFileNameAndPath, 6);
         
