@@ -32,7 +32,7 @@ public class CSV extends InputObject {
             
             countLines = 0;
             bufferReader = new BufferedReader(new FileReader(fullFileNameAndPath));
-            while((line = bufferReader.readLine()) != null && countLines <= maxLines){
+            while((line = bufferReader.readLine()) != null && countLines < maxLines){
                 if (line.split(seperator).length ==  csvFileStats.getMaxColumns()){
                     addLineToData(line, countLines);
                     countLines++;

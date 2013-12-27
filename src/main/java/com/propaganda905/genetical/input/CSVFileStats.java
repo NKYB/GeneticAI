@@ -29,7 +29,7 @@ public class CSVFileStats {
         String seperator = ",";
         int maxColumnsTemp;
         try{
-            while((line = bufferReader.readLine()) != null && countLines <= maxLines){
+            while((line = bufferReader.readLine()) != null && countLines < maxLines){
                 maxColumnsTemp = line.split(seperator).length;
                 if (maxColumnsTemp > maxColumns){
                     countLines = 1;
