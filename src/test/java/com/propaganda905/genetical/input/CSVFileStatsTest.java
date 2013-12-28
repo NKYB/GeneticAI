@@ -31,7 +31,6 @@ public class CSVFileStatsTest extends TestCase {
         URL resourceUrl = getClass().getResource("/testdata.csv");
         Path resourcePath = Paths.get(resourceUrl.toURI());
         this.fullFileNameAndPath = resourcePath.toString();
-        
     }
 
     /**
