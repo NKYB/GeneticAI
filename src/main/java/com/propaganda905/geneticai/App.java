@@ -24,12 +24,12 @@ public class App
         App app = new App();
         
         Data data = new Data();
-        data.createRandomDataAsMap(100, 5);
+        data.createRandomDataAsMap(100, 3);
         
         Config config = new Config();
         config.setData_num_cols(data.getNumDataCols());
         config.setData_num_rows(data.getNumRows());
-        config.setGeneration_num(10000);
+        config.setGeneration_num(1000);
         config.setNum_kernels(1440);
         config.setOutput_num_slots(5);
         config.setOutput_stats_slots(10);

@@ -99,4 +99,87 @@ public class MathTest extends TestCase {
     public void testRun() {
         assertTrue( true );
     }
+    
+    public void testFindChangeMethod(){
+        int[] seeds = Config.getSeeds(1000);
+        for (int i = 0; i < 100; i++) {
+            int change_method = Math.findChangeMethod(seeds, i);
+            if (change_method != 0 && change_method != 1){
+                fail("Change Method Error - Range");
+            }
+        }
+    }
+    
+    public void testFindOutputIndexToModify(){
+        int output_num_slots = 5;
+        int[] seeds = Config.getSeeds(1000);
+        for (int i = 0; i < 100; i++) {
+            int output_index_to_modify = Math.findOutputIndexToModify(output_num_slots,seeds, i);
+            if (output_index_to_modify < 0 && output_index_to_modify >= output_num_slots){
+                fail("Change Method Error - output_index_to_modify: " + output_index_to_modify);
+            }
+        }
+    }
+    
+    public void testFindNewOutputWord(){
+        // findNewOutputWord(int output_index_to_modify, int data_num_cols, int[] output, int[] seeds, int seedIndex)
+        float[] d = new float[6];
+        d[0] = 1;
+        d[1] = 2;
+        d[2] = 3;
+        d[3] = 4;
+        d[4] = 5;
+        d[5] = 9;
+        
+        Data data = new Data();
+        data.setNumCols(2);
+        data.setData(d);
+        
+        Config config = new Config();
+        config.setData_num_cols(data.getNumDataCols());
+        config.setData_num_rows(data.getNumRows());
+        config.setGeneration_num(1000);
+        config.setNum_kernels(1440);
+        config.setOutput_num_slots(10);
+        config.setOutput_stats_slots(10);
+        config.setNum_seeds(1000);
+        
+        int[] seeds = Config.getSeeds(1000);
+        
+        int[] output = Config.getOutput(config.getOutput_num_slots(),config.getNum_kernels());
+        
+        int data_num_cols = config.getData_num_cols();
+        int seedIndex = 0;
+        
+        for(int i=0; i < config.getGeneration_num();i++){
+            for(int j=0; j < 2;j++){
+                int gid = j;
+                int random_index_to_modify = Math.findOutputIndexToModify(config.getOutput_num_slots(), seeds, seedIndex);
+                int output_index_to_modify = (gid * config.getOutput_num_slots()) + random_index_to_modify;
+                seedIndex=Random.setIndex(++seedIndex,  1000);
+
+                int new_word = Math.findNewOutputWord(output_index_to_modify, data_num_cols, output, seeds, seedIndex);
+                output[output_index_to_modify] = new_word;
+                System.out.println(i + " - gid:" + gid + " index_to_modify: " + output_index_to_modify + " word: " + output[output_index_to_modify]);
+            
+                if (
+                        new_word != 0 &&
+                        new_word != 100 &&
+                        new_word != 101 &&
+                        new_word != 110 &&
+                        new_word != 111 &&
+                        new_word != 120 &&
+                        new_word != 121 &&
+                        new_word != 130 &&
+                        new_word != 131
+                ){
+                    fail("FindNewOutputWord Problem");
+                }
+                
+                if (output[output_index_to_modify] != new_word){
+                    fail("Could not set output[output_index_to_modify]");
+                }
+            }
+        }
+    }
 }

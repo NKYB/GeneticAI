@@ -1,4 +1,8 @@
 -------------------------------------------------------------------------------
 Test set: com.propaganda905.geneticai.kernels.MathTest
 -------------------------------------------------------------------------------
-Tests run: 4, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0 sec
+Tests run: 7, Failures: 1, Errors: 0, Skipped: 0, Time elapsed: 0.026 sec <<< FAILURE!
+testFindNewOutputWord(com.propaganda905.geneticai.kernels.MathTest)  Time elapsed: 0.006 sec  <<< FAILURE!
+junit.framework.AssertionFailedError: FindNewOutputWord Problem
+	at junit.framework.Assert.fail(Assert.java:47)
+	at com.propaganda905.geneticai.kernels.MathTest.testFindNewOutputWord(MathTest.java:176)

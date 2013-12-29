@@ -77,6 +77,24 @@ public class Math extends Kernel {
         int change_method = Random.next(0, 1, seeds, seedIndex) * 1;
         return change_method;
     }
+    
+    public static int findOutputIndexToModify(int output_num_slots, int[] seeds, int seedIndex){
+        int index = Random.next(0, output_num_slots - 1, seeds, seedIndex);
+        return index;
+    }
+    
+    public static int findNewOutputWord(int output_index_to_modify, int data_num_cols, int[] output, int[] seeds, int seedIndex){
+        int word = 0;
+        
+        // should we create a new word or delete the current word
+        int change_method = findChangeMethod(seeds, seedIndex);
+        
+        seedIndex=Random.setIndex(++seedIndex,  1000);
+        if (change_method < 1){ 
+            word = Word.createWord(seeds,seedIndex,data_num_cols-1);
+        }
+        return word;
+    }
 
     @Override
     public void run() {
@@ -87,27 +105,18 @@ public class Math extends Kernel {
         
         for(int i=0; i < generation_num;i++){
 
-            // get index of word to change
-            int index = Random.next(0, output_num_slots - 1, seeds, seedIndex);
+            // get output index of word to change
+            int random_index_to_modify = findOutputIndexToModify(output_num_slots, seeds, seedIndex);
+            int output_index_to_modify = (gid * output_num_slots) + random_index_to_modify;
             seedIndex=Random.setIndex(++seedIndex,  1000);
+            
+            // save the current word incase the score doesn't improve so that we can revert back to this word
+            int hold_word = output[output_index_to_modify];
 
-            // should I change or delete
-            int change_method = findChangeMethod(seeds, seedIndex);
-            seedIndex=Random.setIndex(++seedIndex,  1000);
-            
-            int hold_word = output[(gid * output_num_slots) + index];
-            
-            if (change_method < 1){ 
-                // change to new word
-                // create word since new word was selected as change method
-                int word = Word.createWord(seeds,seedIndex,data_num_cols-1);
-                seedIndex=seedIndex+2;
-                seedIndex=Random.setIndex(seedIndex,  1000);
-                output[(gid * output_num_slots) + index] = word;
-            } else { 
-                // delete the current word
-                output[(gid * output_num_slots) + index] = 0;
-            }
+            // modify current output queue
+            output[output_index_to_modify] = findNewOutputWord(output_index_to_modify, data_num_cols, output, seeds, seedIndex);
+            seedIndex=seedIndex+3;
+            seedIndex=Random.setIndex(seedIndex,  1000);
             
             //eval
             float sub_score = 0;
@@ -119,7 +128,7 @@ public class Math extends Kernel {
             if (sub_score < score){
                 score = sub_score;
             } else {
-                output[(gid * output_num_slots) + index] = hold_word;
+                output[output_index_to_modify] = hold_word;
             }
             if (score == 0){
                 output_stats[(gid * output_stats_slots)] = i;
