@@ -24,7 +24,7 @@ public class App
         App app = new App();
         
         Data data = new Data();
-        data.createRandomDataAsMap(100, 10);
+        data.createRandomDataAsMap(10, 4);
         
         Config config = new Config();
         config.setData_num_cols(data.getNumDataCols());
