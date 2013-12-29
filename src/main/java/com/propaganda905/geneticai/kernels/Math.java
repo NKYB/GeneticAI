@@ -72,6 +72,11 @@ public class Math extends Kernel {
         }
         return diff;
     }
+    
+    public static int findChangeMethod(int[] seeds, int seedIndex){
+        int change_method = Random.next(0, 1, seeds, seedIndex) * 1;
+        return change_method;
+    }
 
     @Override
     public void run() {
@@ -87,16 +92,20 @@ public class Math extends Kernel {
             seedIndex=Random.setIndex(++seedIndex,  1000);
 
             // should I change or delete
-            int change_method = Random.next(0, 1, seeds, seedIndex) * 1;
+            int change_method = findChangeMethod(seeds, seedIndex);
             seedIndex=Random.setIndex(++seedIndex,  1000);
+            
             int hold_word = output[(gid * output_num_slots) + index];
-            if (change_method < 1){ // change to new word
+            
+            if (change_method < 1){ 
+                // change to new word
                 // create word since new word was selected as change method
                 int word = Word.createWord(seeds,seedIndex,data_num_cols-1);
                 seedIndex=seedIndex+2;
                 seedIndex=Random.setIndex(seedIndex,  1000);
                 output[(gid * output_num_slots) + index] = word;
-            } else { // delete the current word
+            } else { 
+                // delete the current word
                 output[(gid * output_num_slots) + index] = 0;
             }
             
