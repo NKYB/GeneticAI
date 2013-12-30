@@ -5,6 +5,7 @@ package com.propaganda905.geneticai.kernels;
  * @author Administrator
  */
 public class Config {
+
     private int[] config = new int[7];
     
     /**
@@ -126,5 +127,17 @@ public class Config {
         config[4] = output_stats_slots;
         this.output_stats_slots = output_stats_slots;
     }
-
+    
+    public static float[] getPopulationScores(int numKernels) {
+        float[] populationScores = new float[numKernels];
+        for (int i = 0; i < numKernels; i++) {
+            populationScores[i] = 100000;
+        }
+        return populationScores;  
+    }
+    
+    public static int[] getPopulationIndexs(int numKernels) {
+        int[] populationIndexs = new int[numKernels];
+        return populationIndexs;  
+    }
 }

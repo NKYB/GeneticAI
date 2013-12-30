@@ -16,6 +16,8 @@ public class Math extends Kernel {
     public int[] output;
     public int[] output_stats;
     private final int[] seeds;
+    public float[] population_scores;
+    public int[] population_indexs;
     
     public Math(float[] data, int[] config) {
         data_num_rows       = config[0];
@@ -31,6 +33,9 @@ public class Math extends Kernel {
         this.seeds = Config.getSeeds(num_seeds);
         this.output = Config.getOutput(output_num_slots, num_kernels);
         this.output_stats = Config.getOutput_stats(output_stats_slots, num_kernels);
+        
+        this.population_scores = Config.getPopulationScores(num_kernels);
+        this.population_indexs = Config.getPopulationIndexs(num_kernels);
     }
 
     public static float findSum(int output_num_slots, int gid, int[] output, float[] data, int dataRow){
@@ -125,10 +130,30 @@ public class Math extends Kernel {
                 float target = data[j + data_num_cols];
                 sub_score = sub_score + Math.findDiff(target, sum);
             }
+            
+
+            
             if (sub_score < score){
                 score = sub_score;
+                
+//                int flagContinue = 1;
+//                for(int q=0; q < num_kernels;q++){
+//                    if (sub_score < this.population_scores[q] && flagContinue == 1){
+//                        this.population_scores[q] = sub_score;
+//                        this.population_indexs[q] = gid;
+//                        flagContinue = 0;
+//                    } else if (sub_score == this.population_scores[q]){
+//                        flagContinue = 0;
+//                    }
+//                }
+            
             } else {
                 output[output_index_to_modify] = hold_word;
+//                int random_winner = Random.next(0, 10, seeds, seedIndex) * 1;
+//                seedIndex=Random.setIndex(++seedIndex,  1000);
+//                for(int k=0; k < output_num_slots;k++){
+//                    output_stats[(this.population_indexs[random_winner] * output_num_slots) + k] = output[(this.population_indexs[random_winner] * output_num_slots) + k];
+//                }
             }
             if (score == 0){
                 output_stats[(gid * output_stats_slots)] = i;
