@@ -136,6 +136,9 @@ public class Math extends Kernel {
             if (sub_score < score){
                 score = sub_score;
                 
+                /**
+                 * Experimental inter kernel communication
+                 */
 //                int flagContinue = 1;
 //                for(int q=0; q < num_kernels;q++){
 //                    if (sub_score < this.population_scores[q] && flagContinue == 1){
@@ -149,6 +152,10 @@ public class Math extends Kernel {
             
             } else {
                 output[output_index_to_modify] = hold_word;
+                
+                /**
+                 * Experimental inter kernel communication
+                 */
 //                int random_winner = Random.next(0, 10, seeds, seedIndex) * 1;
 //                seedIndex=Random.setIndex(++seedIndex,  1000);
 //                for(int k=0; k < output_num_slots;k++){
