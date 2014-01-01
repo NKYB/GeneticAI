@@ -130,9 +130,7 @@ public class Math extends Kernel {
                 float target = data[j + data_num_cols];
                 sub_score = sub_score + Math.findDiff(target, sum);
             }
-            
 
-            
             if (sub_score < score){
                 score = sub_score;
                 
