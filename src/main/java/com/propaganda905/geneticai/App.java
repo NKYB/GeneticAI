@@ -61,7 +61,13 @@ public class App
         outputResult(config, data, kernel.output_stats);
         kernel.dispose();
     }
-    
+    /**
+     * Show the results of the math kernet
+     * 
+     * @param config
+     * @param data
+     * @param output_stats 
+     */
     public void outputResult(Config config, Data data, int[] output_stats){
         int foundAnswerFlag = 0;
         int countKernels = 0;
