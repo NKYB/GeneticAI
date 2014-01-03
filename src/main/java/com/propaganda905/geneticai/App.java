@@ -62,7 +62,7 @@ public class App
         kernel.dispose();
     }
     /**
-     * Show the results of the math kernet
+     * Show the results of the math kernel
      * 
      * @param config
      * @param data
