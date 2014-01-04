@@ -66,7 +66,7 @@ public class App
      * 
      * @param config
      * @param data
-     * @param output_stats 
+     * @param output_stats
      */
     public void outputResult(Config config, Data data, int[] output_stats){
         int foundAnswerFlag = 0;
