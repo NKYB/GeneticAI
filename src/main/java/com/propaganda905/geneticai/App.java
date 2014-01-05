@@ -1,5 +1,6 @@
 package com.propaganda905.geneticai;
 
+
 import com.amd.aparapi.ProfileInfo;
 import com.propaganda905.geneticai.kernels.Basic;
 import com.propaganda905.geneticai.kernels.Config;
@@ -7,6 +8,7 @@ import com.propaganda905.geneticai.kernels.Data;
 import com.propaganda905.geneticai.kernels.Math;
 import com.propaganda905.geneticai.kernels.Word;
 import java.util.List;
+
 
 /**
  * Main entry point
