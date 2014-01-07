@@ -9,6 +9,7 @@ import com.propaganda905.geneticai.kernels.Math;
 import com.propaganda905.geneticai.kernels.Word;
 import java.util.List;
 
+
 /**
  * Main entry point
  * 
