@@ -18,6 +18,7 @@ public class Math extends Kernel {
     private final int[] seeds;
     public float[] population_scores;
     public int[] population_indexs;
+    private int[] found_answer;
     
     public Math(float[] data, int[] config) {
         data_num_rows       = config[0];
@@ -36,6 +37,8 @@ public class Math extends Kernel {
         
         this.population_scores = Config.getPopulationScores(num_kernels);
         this.population_indexs = Config.getPopulationIndexs(num_kernels);
+        
+        this.found_answer = Config.getFoundAnswer();
     }
 
     public static float findSum(int output_num_slots, int gid, int[] output, float[] data, int dataRow){
@@ -106,6 +109,7 @@ public class Math extends Kernel {
         // preseed the random number index
         int gid = getGlobalId();
         int seedIndex=Random.setIndex(gid, 1000);
+        int countFailed = 0;
         float score = 100000;
         
         for(int i=0; i < generation_num;i++){
@@ -130,6 +134,16 @@ public class Math extends Kernel {
                 float target = data[j + data_num_cols];
                 sub_score = sub_score + Math.findDiff(target, sum);
             }
+            
+//            outputResult(
+//                        data, 
+//                        output, 
+//                        hold_word, 
+//                        output_index_to_modify, 
+//                        output[output_index_to_modify], 
+//                        sub_score, 
+//                        score
+//                    );
 
             if (sub_score < score){
                 score = sub_score;
@@ -151,19 +165,45 @@ public class Math extends Kernel {
             } else {
                 output[output_index_to_modify] = hold_word;
                 
-                /**
-                 * Experimental inter kernel communication
-                 */
-//                int random_winner = Random.next(0, 10, seeds, seedIndex) * 1;
-//                seedIndex=Random.setIndex(++seedIndex,  1000);
-//                for(int k=0; k < output_num_slots;k++){
-//                    output_stats[(this.population_indexs[random_winner] * output_num_slots) + k] = output[(this.population_indexs[random_winner] * output_num_slots) + k];
-//                }
+                countFailed++;
+                
+                if (countFailed > 100){
+                    countFailed = 0;
+                    for(int k=0; k < output_num_slots;k++){
+                        output_stats[(gid * output_stats_slots)+k] = 0;
+                    }
+                    score = 100000;
+                    
+                }
+                    
+
+                    /**
+                    * Experimental inter kernel communication
+                    */
+//                    int random_winner = Random.next(0,  10, seeds, seedIndex) * 1;
+//                    seedIndex=Random.setIndex(++seedIndex,  1000);
+//                    for(int k=0; k < output_num_slots;k++){
+//                        output_stats[(this.population_indexs[random_winner] * output_num_slots) + k] = output[(this.population_indexs[random_winner] * output_num_slots) + k];
+//                    }
+//                    score = this.population_scores[random_winner];
+//                    
+//                }     
+
             }
-            if (score == 0){
+//if (score == 0){
+            if (score == 0 || found_answer[0] == 1){
                 output_stats[(gid * output_stats_slots)] = i;
+                
+                if (found_answer[0] == 1){
+                    output_stats[(gid * output_stats_slots)] = i ;
+                }
+                if (score == 0){
+                    found_answer[0] = 1;
+                }
+                
                 i=generation_num;
             }
+
         }
         if (output_stats[(gid * output_stats_slots)]==0){
             output_stats[(gid * output_stats_slots)] = generation_num;
@@ -176,4 +216,51 @@ public class Math extends Kernel {
             }
         }
     }
+    
+//    public void outputResult(float[] data, int[] output_stats, int hold_word, int output_index_to_modify, int word, float sub_score, float score){
+//        int foundAnswerFlag = 0;
+//        int countKernels = 0;
+//        float sum = 0;
+//        for (int i = 0; i < num_kernels * output_num_slots; i++) {
+//
+//            if (output_stats[i] > 0){
+//                if (foundAnswerFlag == 0){
+//                    System.out.println( "---- index to modify: " + output_index_to_modify + " word: " + word);
+//                }
+//                foundAnswerFlag = 1;
+//                System.out.println( "  Word[" + i + "]: " + toString((int)output_stats[i], data, sum) );
+//                sum = wordToNum(sum, (int)output_stats[i], data);
+//            }
+//            if ((i%output_num_slots==output_num_slots-1) && (foundAnswerFlag == 1)){
+//                System.out.println( "  Sum    : " + sum);
+//                System.out.println( "  Target : " + data[data_num_cols]);
+//                System.out.println( "  Sub Score : " + sub_score);
+//                System.out.println( "  Score : " + score);
+//                foundAnswerFlag = 0;
+//                sum=0;
+//            }
+//        }
+//    }
+//    
+//    public float wordToNum(float sum, int word, float[] data){
+//        int action = Word.findAction(word);
+//        int dataIndex = Word.findDataIndex(word);
+//        return Math.findSumOfAction(sum, action, data[dataIndex]);
+//    }
+//    
+//    public String toString(int word, float[] data, float sum){
+//        int action = Word.findAction(word);
+//        int dataIndex = Word.findDataIndex(word);
+//        String actionPhrase = "";
+//        if (action == 0){
+//            actionPhrase = "+";
+//        } else if (action == 1){
+//            actionPhrase = "-";
+//        } else if (action == 2){
+//            actionPhrase = "*";
+//        } else if (action == 3){
+//            actionPhrase = "/";
+//        }
+//        return sum + " " + actionPhrase + " " +  data[dataIndex] + " (" + word + ")";
+//    }
 }

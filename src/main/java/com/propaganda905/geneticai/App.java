@@ -1,6 +1,7 @@
 package com.propaganda905.geneticai;
 
 import com.amd.aparapi.ProfileInfo;
+import com.amd.aparapi.Range;
 import com.propaganda905.geneticai.kernels.Basic;
 import com.propaganda905.geneticai.kernels.Config;
 import com.propaganda905.geneticai.kernels.Data;
@@ -24,14 +25,14 @@ public class App
         App app = new App();
         
         Data data = new Data();
-        data.createRandomDataAsMap(10, 4);
+        data.createRandomDataAsMap(10, 7);
         
         Config config = new Config();
         config.setData_num_cols(data.getNumDataCols());
         config.setData_num_rows(data.getNumRows());
         config.setGeneration_num(1000);
-        config.setNum_kernels(1440);
-        config.setOutput_num_slots(5);
+        config.setNum_kernels(16);
+        config.setOutput_num_slots(7);
         config.setOutput_stats_slots(10);
         config.setNum_seeds(10000);
 
@@ -61,6 +62,7 @@ public class App
         outputResult(config, data, kernel.output_stats);
         kernel.dispose();
     }
+    
     /**
      * Show the results of the math kernel
      * 

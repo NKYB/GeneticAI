@@ -6,6 +6,12 @@ package com.propaganda905.geneticai.kernels;
  */
 public class Config {
 
+    static int[] getFoundAnswer() {
+        int[] foundAnswer = new int[1];
+        foundAnswer[0] = 0;
+        return foundAnswer;
+    }
+
     private int[] config = new int[7];
     
     /**
