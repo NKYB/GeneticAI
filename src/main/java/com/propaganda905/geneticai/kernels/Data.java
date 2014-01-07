@@ -68,7 +68,7 @@ public class Data {
                 if (j<numCols-1){
                     inputData[i][j] = (int)(java.lang.Math.random()*100);
                 } else {
-                    inputData[i][j] = inputData[i][0] * inputData[i][1] +  inputData[i][2];
+                    inputData[i][j] = inputData[i][0] * inputData[i][1] +  inputData[i][2] - inputData[i][4];
                 }
             }
         }

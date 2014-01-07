@@ -25,13 +25,13 @@ public class App
         App app = new App();
         
         Data data = new Data();
-        data.createRandomDataAsMap(10, 7);
+        data.createRandomDataAsMap(200, 7);
         
         Config config = new Config();
         config.setData_num_cols(data.getNumDataCols());
         config.setData_num_rows(data.getNumRows());
-        config.setGeneration_num(1000);
-        config.setNum_kernels(16);
+        config.setGeneration_num(100000);
+        config.setNum_kernels(1440);
         config.setOutput_num_slots(7);
         config.setOutput_stats_slots(10);
         config.setNum_seeds(10000);
@@ -57,8 +57,8 @@ public class App
     public void runMathKernel(Config config, Data data){
         Math kernel = new Math(data.getData(), config.getConfig());
         System.out.println("Execution mode = " + kernel.getExecutionMode());
-//        kernel.execute(config.getNum_kernels());
-        kernel.run();
+        kernel.execute(config.getNum_kernels());
+//        kernel.run();
         outputResult(config, data, kernel.output_stats);
         kernel.dispose();
     }

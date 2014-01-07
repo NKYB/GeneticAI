@@ -167,7 +167,7 @@ public class Math extends Kernel {
                 
                 countFailed++;
                 
-                if (countFailed > 100){
+                if (countFailed > 1000){
                     countFailed = 0;
                     for(int k=0; k < output_num_slots;k++){
                         output_stats[(gid * output_stats_slots)+k] = 0;
