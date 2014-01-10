@@ -29,7 +29,7 @@ public class DataTest extends TestCase {
     public void testSetNumRows() {
         int numRows = 5;
         Data data = new Data();
-        data.createRandomDataAsMap(numRows, 3);
+        data.createRandomDataAsMap(numRows, 5);
         data.setNumRows(numRows);
         assertEquals(numRows, data.getNumRows());
     }

@@ -41,7 +41,7 @@ public class AppTest extends TestCase{
     public void testApp()
     {
         Data data = new Data();
-        data.createRandomDataAsMap(20,3);
+        data.createRandomDataAsMap(20,5);
         
         Config config = new Config();
         config.setData_num_cols(data.getNumDataCols());
@@ -95,7 +95,7 @@ public class AppTest extends TestCase{
         App instance = new App();
         
         Data data = new Data();
-        data.createRandomDataAsMap(20,3);
+        data.createRandomDataAsMap(20,5);
         
         Config config = new Config();
         config.setData_num_cols(data.getNumDataCols());
