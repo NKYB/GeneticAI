@@ -12,7 +12,6 @@ import java.util.List;
 /**
  * Main entry point
  * 
- * 
  * @author NKYB
  */
 public class App 
