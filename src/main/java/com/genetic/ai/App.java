@@ -1,12 +1,12 @@
-package com.propaganda905.geneticai;
+package com.genetic.ai;
 
 import com.amd.aparapi.ProfileInfo;
 import com.amd.aparapi.Range;
-import com.propaganda905.geneticai.kernels.Basic;
-import com.propaganda905.geneticai.kernels.Config;
-import com.propaganda905.geneticai.kernels.Data;
-import com.propaganda905.geneticai.kernels.Math;
-import com.propaganda905.geneticai.kernels.Word;
+import com.genetic.ai.kernels.Basic;
+import com.genetic.ai.kernels.Config;
+import com.genetic.ai.kernels.Data;
+import com.genetic.ai.kernels.Math;
+import com.genetic.ai.kernels.Word;
 import java.util.List;
 
 /**

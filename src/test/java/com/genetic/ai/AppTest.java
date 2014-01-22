@@ -1,7 +1,8 @@
-package com.propaganda905.geneticai;
+package com.genetic.ai;
 
-import com.propaganda905.geneticai.kernels.Config;
-import com.propaganda905.geneticai.kernels.Data;
+import com.genetic.ai.App;
+import com.genetic.ai.kernels.Config;
+import com.genetic.ai.kernels.Data;
 import junit.framework.Test;
 import junit.framework.TestCase;
 import junit.framework.TestSuite;

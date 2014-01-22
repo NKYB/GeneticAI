@@ -1,4 +1,4 @@
-package com.propaganda905.geneticai.kernels;
+package com.genetic.ai.kernels;
 
 import com.amd.aparapi.Kernel;
 

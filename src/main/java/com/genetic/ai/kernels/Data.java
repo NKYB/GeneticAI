@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.propaganda905.geneticai.kernels;
+package com.genetic.ai.kernels;
 
 /**
  *

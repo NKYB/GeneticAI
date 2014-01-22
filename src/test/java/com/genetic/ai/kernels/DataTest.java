@@ -1,5 +1,6 @@
 package com.propaganda905.geneticai.kernels;
 
+import com.genetic.ai.kernels.Data;
 import junit.framework.TestCase;
 
 /**
