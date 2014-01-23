@@ -8,7 +8,7 @@ import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
 /**
- * Test the application entry point 
+ * Test the application entry point, should be moving to unit tests
  * 
  * @author NKYB
  */
